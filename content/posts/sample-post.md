@@ -1,7 +1,7 @@
 ---
-title: Sample Structural Post
+title: Tributary area
 date: 2025-08-25
-author: Your Name
-slug: sample-post
+author: kamal samaila
+slug: tributary-area
 ---
 This is a test post for the Matrix Section blog.
