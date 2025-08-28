@@ -37,11 +37,27 @@ export function getAllPosts(): PostMeta[] {
 
 export function getPostBySlug(slug: string): Post | null {
   if (!fs.existsSync(postsDirectory)) return null
+  // Try filename-based resolution first
   const candidates = [
     path.join(postsDirectory, `${slug}.md`),
     path.join(postsDirectory, `${slug}.mdx`),
   ]
-  const fullPath = candidates.find((p) => fs.existsSync(p))
+  let fullPath = candidates.find((p) => fs.existsSync(p))
+  if (!fullPath) {
+    // Fallback: scan all files and match frontmatter slug
+    const files = fs
+      .readdirSync(postsDirectory)
+      .filter((f) => f.endsWith(".md") || f.endsWith(".mdx"))
+    for (const file of files) {
+      const p = path.join(postsDirectory, file)
+      const raw = fs.readFileSync(p, "utf8")
+      const { data } = matter(raw)
+      if (data?.slug === slug) {
+        fullPath = p
+        break
+      }
+    }
+  }
   if (!fullPath) return null
   const fileContents = fs.readFileSync(fullPath, "utf8")
   const { data, content } = matter(fileContents)
