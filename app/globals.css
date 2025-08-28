@@ -2,6 +2,87 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Light professional palette */
+  /* Neutral monochrome inspired by Rick Owens (light, not too dark) */
+  --background: 210 7% 96%;      /* light warm gray */
+  --foreground: 222 15% 15%;     /* soft near-black */
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  --primary: 0 0% 20%;           /* charcoal accent */
+  --primary-foreground: 0 0% 98%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222 47% 11%;
+  --muted: 210 10% 92%;
+  --muted-foreground: 215 10% 35%;
+  --accent: 210 8% 90%;
+  --accent-foreground: 222 15% 15%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 210 12% 85%;
+  --input: 210 12% 85%;
+  --ring: 0 0% 25%;
+  --radius: 0.375rem;
+
+  --chart-1: 0 0% 96%;
+  --chart-2: 0 0% 70%;
+  --chart-3: 0 0% 50%;
+  --chart-4: 0 0% 30%;
+  --chart-5: 0 0% 12%;
+
+  --sidebar-background: 0 0% 100%;
+  --sidebar-foreground: 222 15% 15%;
+  --sidebar-primary: 0 0% 20%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 210 8% 90%;
+  --sidebar-accent-foreground: 222 15% 15%;
+  --sidebar-border: 210 12% 85%;
+  --sidebar-ring: 0 0% 25%;
+}
+
+html, body { background-color: hsl(var(--background)); color: hsl(var(--foreground)); }
+
+/* Subtle focus ring for accessibility */
+button:focus, a:focus, input:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.4);
+}
+
+/* Add gentle gradient backgrounds and motion utilities */
+.gradient-primary {
+  background: linear-gradient(135deg, hsl(221 83% 60%) 0%, hsl(221 83% 53%) 40%, hsl(221 83% 46%) 100%);
+  color: white;
+}
+.hover-lift {
+  transition: transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease, border-color 200ms ease;
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* Improve readability of markdown/prose */
+.prose {
+  --tw-prose-body: hsl(var(--foreground));
+  --tw-prose-headings: hsl(var(--foreground));
+  --tw-prose-bold: hsl(var(--foreground));
+  --tw-prose-links: hsl(var(--foreground));
+  --tw-prose-code: hsl(var(--foreground));
+  --tw-prose-hr: hsl(var(--border));
+  --tw-prose-quotes: hsl(var(--foreground));
+  --tw-prose-counters: hsl(var(--muted-foreground));
+  --tw-prose-bullets: hsl(var(--muted-foreground));
+  --tw-prose-th-borders: hsl(var(--border));
+  --tw-prose-td-borders: hsl(var(--border));
+}
+.prose a { text-decoration: underline; text-underline-offset: 2px; }
+.prose code { background: hsla(0,0%,100%,0.04); padding: 0.1rem 0.3rem; }
+.prose table { border-color: hsl(var(--border)); }
+.prose thead th { border-bottom-color: hsl(var(--border)); }
+.prose tbody td { border-top-color: hsl(var(--border)); }
+
 /* Add any global styles below */
 body {
   @apply bg-gray-50;

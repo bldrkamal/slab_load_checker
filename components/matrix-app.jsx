@@ -2,66 +2,35 @@
 
 // src/App.jsx
 import { useState, useRef, useEffect } from "react"
-import { Calculator, Menu, X, BookOpen, Mail, Shield, FileText } from "lucide-react"
-// import AdSenseAd from "./adsense-ad"
+import { Calculator, Menu, X } from "lucide-react"
 
 const MatrixApp = () => {
   const [currentPage, setCurrentPage] = useState("home")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  const pages = [
-    { id: "home", name: "Calculator", icon: Calculator },
-    { id: "about", name: "About Us", icon: BookOpen },
-    { id: "contact", name: "Contact", icon: Mail },
-    { id: "privacy", name: "Privacy Policy", icon: Shield },
-    { id: "terms", name: "Terms of Service", icon: FileText },
-  ]
+  const pages = [{ id: "home", name: "Calculator", icon: Calculator }]
 
   const renderPage = () => {
-    switch (currentPage) {
-      case "home":
-        return <HomePage />
-      case "about":
-        return <AboutPage />
-      case "contact":
-        return <ContactPage />
-      case "privacy":
-        return <PrivacyPage />
-      case "terms":
-        return <TermsPage />
-      default:
-        return <HomePage />
-    }
+    return <HomePage />
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
-      <header className="bg-blue-600 text-white shadow-lg">
+      <header className="bg-sidebar text-sidebar-foreground border-b border-[hsl(var(--border))]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center">
               <Calculator className="h-8 w-8 mr-2" />
-              <h1 className="text-xl font-bold">Matrix Section</h1>
+              <h1 className="text-xl font-bold tracking-tight uppercase">Matrix Section</h1>
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-8">
-              {pages.map((page) => (
-                <button
-                  key={page.id}
-                  onClick={() => setCurrentPage(page.id)}
-                  className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPage === page.id ? "bg-blue-700 text-white" : "text-blue-100 hover:bg-blue-500 hover:text-white"}`}
-                >
-                  <page.icon className="h-4 w-4" />
-                  <span>{page.name}</span>
-                </button>
-              ))}
-            </nav>
+            <nav className="hidden md:flex space-x-8 uppercase tracking-wide text-sm" />
 
             {/* Mobile menu button */}
             <div className="md:hidden">
-              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-blue-100 hover:text-white p-2">
+              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 hover:opacity-80">
                 {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
             </div>
@@ -70,21 +39,18 @@ const MatrixApp = () => {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-blue-700">
+          <div className="md:hidden bg-[hsl(var(--accent))]">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {pages.map((page) => (
-                <button
-                  key={page.id}
-                  onClick={() => {
-                    setCurrentPage(page.id)
-                    setMobileMenuOpen(false)
-                  }}
-                  className={`flex items-center space-x-2 w-full px-3 py-2 rounded-md text-base font-medium ${currentPage === page.id ? "bg-blue-800 text-white" : "text-blue-100 hover:bg-blue-600 hover:text-white"}`}
-                >
-                  <page.icon className="h-5 w-5" />
-                  <span>{page.name}</span>
-                </button>
-              ))}
+              <button
+                onClick={() => {
+                  setCurrentPage("home")
+                  setMobileMenuOpen(false)
+                }}
+                className="flex items-center space-x-2 w-full px-3 py-2 text-base"
+              >
+                <Calculator className="h-5 w-5" />
+                <span>Calculator</span>
+              </button>
             </div>
           </div>
         )}
@@ -94,15 +60,15 @@ const MatrixApp = () => {
       <main className="flex-1">{renderPage()}</main>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white">
+      <footer className="bg-sidebar text-sidebar-foreground border-t border-[hsl(var(--border))]">
         <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <div className="flex items-center mb-4">
                 <Calculator className="h-6 w-6 mr-2" />
-                <span className="text-lg font-semibold">Matrix Section</span>
+                <span className="text-lg font-semibold uppercase tracking-wide">Matrix Section</span>
               </div>
-              <p className="text-gray-300 text-sm">
+              <p className="text-[hsl(var(--muted-foreground))] text-sm">
                 Tools that help construction practitioners validate structural analyses and design — fast.
               </p>
             </div>
@@ -111,10 +77,7 @@ const MatrixApp = () => {
               <ul className="space-y-2">
                 {pages.map((page) => (
                   <li key={page.id}>
-                    <button
-                      onClick={() => setCurrentPage(page.id)}
-                      className="text-gray-300 hover:text-white text-sm transition-colors"
-                    >
+                    <button onClick={() => setCurrentPage(page.id)} className="hover:opacity-80 text-sm">
                       {page.name}
                     </button>
                   </li>
@@ -123,7 +86,7 @@ const MatrixApp = () => {
             </div>
             <div>
               <h3 className="text-sm font-semibold uppercase tracking-wider mb-4">Legal</h3>
-              <p className="text-gray-300 text-sm">© {new Date().getFullYear()} slab to beam load distribution app</p>
+              <p className="text-[hsl(var(--muted-foreground))] text-sm">© {new Date().getFullYear()} slab to beam load distribution app</p>
             </div>
           </div>
         </div>
@@ -295,89 +258,89 @@ const HomePage = () => {
     <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-3">
-          <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div className="border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-6 mb-6">
             <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Tributary Area Calculator</h2>
-              <div className="text-sm text-gray-600">Matrix Section</div>
+              <h2 className="text-2xl font-bold mb-2 uppercase tracking-wide">Tributary Area Calculator</h2>
+              <div className="text-sm text-[hsl(var(--muted-foreground))]">Matrix Section</div>
             </div>
 
             {/* Input Form */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Short Span (lx) - meters</label>
+                <label className="block text-sm font-medium mb-2">Short Span (lx) - meters</label>
                 <input
                   type="number"
                   step="0.01"
                   value={inputs.lx}
                   onChange={(e) => setInputs({ ...inputs, lx: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-[hsl(var(--border))] bg-transparent focus:outline-none"
                   placeholder="4.0"
                 />
                 {errors.lx && <p className="text-red-500 text-sm mt-1">{errors.lx}</p>}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Long Span (ly) - meters</label>
+                <label className="block text-sm font-medium mb-2">Long Span (ly) - meters</label>
                 <input
                   type="number"
                   step="0.01"
                   value={inputs.ly}
                   onChange={(e) => setInputs({ ...inputs, ly: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-[hsl(var(--border))] bg-transparent focus:outline-none"
                   placeholder="6.0"
                 />
                 {errors.ly && <p className="text-red-500 text-sm mt-1">{errors.ly}</p>}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Check Slab Type</label>
-                <div className="text-xs text-gray-500 mb-2">
+                <label className="block text-sm font-medium mb-2">Check Slab Type</label>
+                <div className="text-xs text-[hsl(var(--muted-foreground))] mb-2">
                   Press to detect slab action (ly/lx ≥ 2 → One-Way) and visualize the tributary areas.
                 </div>
                 <button
                   onClick={handleCheckVisualize}
-                  className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                  className="w-full bg-[hsl(var(--foreground))] text-[hsl(var(--background))] font-medium py-2 px-4 transition-colors"
                 >
                   Check Slab & Visualize
                 </button>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Slab thickness (mm)</label>
+                <label className="block text-sm font-medium mb-2">Slab thickness (mm)</label>
                 <input
                   type="number"
                   step="1"
                   value={inputs.slabThickness}
                   onChange={(e) => setInputs({ ...inputs, slabThickness: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-[hsl(var(--border))] bg-transparent focus:outline-none"
                 />
                 {errors.slabThickness && <p className="text-red-500 text-sm mt-1">{errors.slabThickness}</p>}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Concrete density (kN/m³)</label>
+                <label className="block text-sm font-medium mb-2">Concrete density (kN/m³)</label>
                 <input
                   type="number"
                   step="0.1"
                   value={inputs.concreteDensity}
                   onChange={(e) => setInputs({ ...inputs, concreteDensity: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-[hsl(var(--border))] bg-transparent focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Ceiling load (POP) (kN/m²)</label>
+                <label className="block text-sm font-medium mb-2">Ceiling load (POP) (kN/m²)</label>
                 <input
                   type="number"
                   step="0.01"
                   value={inputs.ceilingLoad}
                   onChange={(e) => setInputs({ ...inputs, ceilingLoad: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-[hsl(var(--border))] bg-transparent focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium mb-2">
                   Dead Load override (kN/m²) — optional
                 </label>
                 <input
@@ -385,68 +348,59 @@ const HomePage = () => {
                   step="0.01"
                   value={inputs.deadLoad}
                   onChange={(e) => setInputs({ ...inputs, deadLoad: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-[hsl(var(--border))] bg-transparent focus:outline-none"
                   placeholder="Leave empty to compute from thickness"
                 />
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-[hsl(var(--muted-foreground))] mt-1">
                   If left blank, DL = (thickness_m × density) + ceiling load (POP)
                 </p>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Live Load (LL) - kN/m²</label>
+                <label className="block text-sm font-medium mb-2">Live Load (LL) - kN/m²</label>
                 <input
                   type="number"
                   step="0.01"
                   value={inputs.liveLoad}
                   onChange={(e) => setInputs({ ...inputs, liveLoad: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-[hsl(var(--border))] bg-transparent focus:outline-none"
                   placeholder="2.0"
                 />
               </div>
 
               <div className="flex items-end">
-                <button
-                  onClick={handleFullCalculate}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none"
-                >
+                <button onClick={handleFullCalculate} className="w-full bg-[hsl(var(--foreground))] text-[hsl(var(--background))] font-medium py-2 px-4 transition-colors">
                   Compute UDL (Load Breakdown)
                 </button>
               </div>
             </div>
 
             {swapNotification && (
-              <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded mb-6">
+              <div className="border border-[hsl(var(--border))] text-[hsl(var(--foreground))] px-4 py-3 mb-6">
                 {swapNotification}
               </div>
             )}
           </div>
 
-          {/* {results && (
-            <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-              <div className="text-center">
-                <AdSenseAd adSlot="2345678901" adFormat="rectangle" style={{ display: "block", minHeight: "250px" }} />
-              </div>
-            </div>
-          )} */}
+          {/* Ads disabled for cleaner UI */}
 
           {results && (
             <>
               {/* Visualization */}
-              <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Visualization</h3>
+              <div className="border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-6 mb-6">
+                <h3 className="text-xl font-semibold mb-4">Visualization</h3>
                 <VisualizationCanvas results={results} />
               </div>
 
               {/* Results Table */}
-              <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Results</h3>
+              <div className="border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-6 mb-6">
+                <h3 className="text-xl font-semibold mb-4">Results</h3>
                 <ResultsTable results={results} />
               </div>
 
               {/* UDL Verification */}
-              <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">UDL Breakdown & Verification</h3>
+              <div className="border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-6 mb-6">
+                <h3 className="text-xl font-semibold mb-4">UDL Breakdown & Verification</h3>
                 <StepByStepExplanations results={results} />
               </div>
 
@@ -456,18 +410,7 @@ const HomePage = () => {
           )}
         </div>
 
-        {/* <div className="lg:col-span-1">
-          <div className="sticky top-6 space-y-6">
-            <div className="bg-white rounded-lg shadow-lg p-4">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3">Advertisement</h3>
-              <AdSenseAd adSlot="3456789012" adFormat="vertical" style={{ display: "block", minHeight: "600px" }} />
-            </div>
-
-            <div className="bg-white rounded-lg shadow-lg p-4">
-              <AdSenseAd adSlot="4567890123" adFormat="square" style={{ display: "block", minHeight: "300px" }} />
-            </div>
-          </div>
-        </div> */}
+        {/* Sidebar ads removed */}
       </div>
     </div>
   )
@@ -720,7 +663,7 @@ const VisualizationCanvas = ({ results }) => {
         ref={canvasRef}
         width={600}
         height={400}
-        className="border border-gray-300 rounded-lg max-w-full h-auto"
+        className="border border-[hsl(var(--border))] max-w-full h-auto"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       />
@@ -846,9 +789,7 @@ const AboutPage = () => {
         <h1 className="text-3xl font-bold text-gray-900 mb-6">About Matrix Section</h1>
         <p>Matrix Section builds practical tools to help engineers validate structural analyses quickly.</p>
 
-        {/* <div className="mt-8 text-center">
-          <AdSenseAd adSlot="5678901234" adFormat="horizontal" style={{ display: "block", minHeight: "90px" }} />
-        </div> */}
+        {/* Ad placeholder removed */}
       </div>
     </div>
   )
@@ -861,9 +802,7 @@ const ContactPage = () => {
         <h1 className="text-3xl font-bold text-gray-900 mb-6">Contact Us</h1>
         <p className="text-gray-600">contact@matrixsection.com</p>
 
-        {/* <div className="mt-8 text-center">
-          <AdSenseAd adSlot="6789012345" adFormat="horizontal" style={{ display: "block", minHeight: "90px" }} />
-        </div> */}
+        {/* Ad placeholder removed */}
       </div>
     </div>
   )
